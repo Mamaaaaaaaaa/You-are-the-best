@@ -1,0 +1,197 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جمالك لا يقاوم، توتا!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">أنت رائعة جدًا!</h1>
+        <p class="subtitle">لنرى كم أنت جميلة، توتا!</p>
+
+        <form id="beautyForm">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" required>
+
+            <label for="age">العمر:</label>
+            <input type="number" id="age" required min="1" max="100">
+
+            <label for="nickname">الدلع:</label>
+            <input type="text" id="nickname" required>
+
+            <label for="talent">موهبة الغناء:</label>
+            <select id="talent" required>
+                <option value="none">-- اختر --</option>
+                <option value="singing">الغناء</option>
+                <option value="none">لا شيء</option>
+            </select>
+
+            <label for="hairType">نوع الشعر:</label>
+            <select id="hairType" required>
+                <option value="curly">كيرلي</option>
+                <option value="straight">استريت</option>
+            </select>
+
+            <button type="submit">احسب جمالك 😍</button>
+        </form>
+
+        <div id="message" class="hidden">
+            <p>أنتِ جميلة جدًا، توتا، لدرجة أن الاحصائيات تقول أنكِ جميلة لدرجة أن وجهكِ يشبه قطعة من القمر أو صفحة من المصحف، وصوتكِ جميل وعذب وعليكِ الكثير من الصفات الجميلة مثل الكيوت والعسل. 🌙💖</p>
+            <p>هل لديكِ شيء تحبين قوله؟ اضغطي على الزر أدناه لإرسال رسالة ودية للصانع ❤️</p>
+            <button id="replyButton">ماذا تحبين أن تبلغي الصانع؟ ✨</button>
+        </div>
+
+        <div id="replyForm" class="hidden">
+            <textarea id="userMessage" placeholder="اكتب رسالتك هنا..."></textarea>
+            <button id="sendMessage">أرسل الرسالة 🌟</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html><style>/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffebf1;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ff69b4;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #888;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+input,
+select {
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff69b4;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #ff3b78;
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #4caf50;
+}
+
+#replyForm {
+    margin-top: 10px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 60px;
+}
+
+#sendMessage {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#sendMessage:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}</style><script>// script.js
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("beautyForm");
+    const message = document.getElementById("message");
+    const replyButton = document.getElementById("replyButton");
+    const replyForm = document.getElementById("replyForm");
+    const sendMessageButton = document.getElementById("sendMessage");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        form.style.display = "none";
+        message.classList.remove("hidden");
+    });
+
+    replyButton.addEventListener("click", function() {
+        message.classList.add("hidden");
+        replyForm.classList.remove("hidden");
+    });
+
+    sendMessageButton.addEventListener("click", function() {
+        const userMessage = document.getElementById("userMessage").value;
+        if (userMessage.trim() === "") {
+            alert("يرجى كتابة رسالة.");
+            return;
+        }
+        
+        // إرسال الرسالة عبر البريد الإلكتروني
+        const mailtoLink = `mailto:hamzamagdy1977@gmail.com?subject=رسالة%20جمال%20توتا&body=${encodeURIComponent(userMessage)}`;
+        window.location.href = mailtoLink;
+    });
+});</script>
